@@ -4,12 +4,10 @@
  */
 function Board (layout) {
   var self = this;
-  this.n     = n;
-  this.tiles = layout;
 
   // Create tiles
-  this.tiles.map(function (drow) {
-    drow.map(function (is_tile) {
+  this.tiles = layout.map(function (drow) {
+    return drow.map(function (is_tile) {
       return is_tile == 1 ? new Tile() : false;
     });
   });
@@ -30,18 +28,12 @@ function Board (layout) {
 (2,0) (2,1) (2,2)
 
 
+
             (0,2)
       (0,1)       (1,2)
 (0,0)       (1,1)       (2,2)
       (1,0)       (2,1)
             (2,0)
-
-
-
-
-
-
-
 
 
 

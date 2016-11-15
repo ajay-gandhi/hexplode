@@ -46,13 +46,16 @@ Tile.prototype.hit = function (color, convert) {
  *  DoLef: o,-
  *  UpLef: -,o
  */
-var get_neighbors(b, x, y) {
-  var neighbors = [];
-  if (x - 1 >= 0 && y + 1 <= n) neighbors.push(b[y + 1, x - 1]); // above
-  if (y + 1 <= n)               neighbors.push(b[y + 1, x    ]); // upper right
-  if (x + 1 >= 0)               neighbors.push(b[y,     x + 1]); // lower right
-  if (x + 1 >= 0 && y - 1 <= n) neighbors.push(b[y - 1, x + 1]); // below
-  if (y - 1 <= n)               neighbors.push(b[y - 1, x    ]); // lower left
-  if (x - 1 >= 0)               neighbors.push(b[y,     x + 1]); // upper left
-  return neighbors;
+var get_neighbors = function (b, x, y) {
+  var ym = b.length - 1,
+      xm = b[0].length - 1;
+  var n = [];
+
+  if (x - 1 >= 0 && y + 1 <= ym && b[y + 1][x - 1]) n.push(b[y + 1][x - 1]); // above
+  if (y + 1 <= ym && b[y + 1][x])                   n.push(b[y + 1][x    ]); // upper right
+  if (x + 1 <= xm && b[y][x + 1])                   n.push(b[y    ][x + 1]); // lower right
+  if (x + 1 <= xm && y - 1 >= 0 && b[y - 1][x + 1]) n.push(b[y - 1][x + 1]); // below
+  if (y - 1 >= 0  && b[y - 1][x])                   n.push(b[y - 1][x    ]); // lower left
+  if (x - 1 >= 0  && b[y][x - 1])                   n.push(b[y    ][x + 1]); // upper left
+  return n;
 }
