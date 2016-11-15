@@ -1,8 +1,15 @@
 
-div#board {
-  position: relative;
+.board {
+  margin-top: 50px;
 }
-
+.board .row {
+  margin-top: -50px;
+}
+.tile {
+  position: relative;
+  display: inline-block;
+  margin-right: 66px;
+}
 .tile-pre {
   display: inline-block;
   width: 0;

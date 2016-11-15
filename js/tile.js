@@ -37,6 +37,16 @@ Tile.prototype.hit = function (color, convert) {
 }
 
 /**
+ * Renders the tile into HTML.
+ */
+Tile.prototype.render = function (selector) {
+  selector
+    .append('<div class="tile-pre"></div>')
+    .append('<div class="tile-main"></div>')
+    .append('<div class="tile-post"></div>');
+}
+
+/**
  * Creates a list of neighboring tiles for position x, y
  *
  *  Above: -,+
