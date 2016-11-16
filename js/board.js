@@ -70,7 +70,7 @@ Board.prototype.check_game_over = function () {
     for (var i = 0; i < board.tile_count.length; i++) {
       // Game over if any player 0 tiles
       if (board.tile_count[i] == 0) {
-        console.log('Game over!');
+        console.log('Game over! Player', i, 'loses.');
         this.playing = false;
         this.started = false;
         return true;

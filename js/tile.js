@@ -41,8 +41,6 @@ Tile.prototype.hit = function (color, convert) {
     this.board.tile_count[this.color]--;
     this.color = -1;
 
-    if (this.board.check_game_over()) return;
-
     // Trigger neighbors
     setTimeout(function (neighbors) {
       for (var i = 0; i < neighbors.length; i++) {
@@ -50,7 +48,10 @@ Tile.prototype.hit = function (color, convert) {
         nb.hit(color, color);
         nb.update();
       }
+      this.board.check_game_over();
     }, 500, this.neighbors);
+
+    // if (this.board.check_game_over()) return;
   }
   return this;
 }
