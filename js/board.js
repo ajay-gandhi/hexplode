@@ -5,8 +5,13 @@
 function Board (layout) {
   var self = this;
 
+  this.turn = -1;
+  this.n_players = layout.n;
+  this.playing = false;
+  this.started = false;
+
   // Create tiles
-  this.tiles = layout.map(function (drow) {
+  this.tiles = layout.template.map(function (drow) {
     return drow.map(function (is_tile) {
       return is_tile == 1 ? new Tile() : false;
     });
@@ -16,7 +21,7 @@ function Board (layout) {
   this.tiles.forEach(function (drow, y) {
     drow.forEach(function (tile, x) {
       if (tile) {
-        tile.init(self, x, y, false);
+        tile.init(self, x, y, -1);
       }
     });
   });
@@ -43,11 +48,9 @@ Board.prototype.render = function (selector) {
         new_row.css('margin-left', (y * 97) + 'px');
       }
 
-      var tile_el = $('<div class="tile">' + (y * 3 + x) + '</div>');
-      // tile_el.css('margin-left', (34 * x) + 'px');
-      self.tiles[y][x].render(tile_el);
       var rows = board_el.children('.row');
-      rows.eq(rows.length - x - 1).append(tile_el);
+      self.tiles[y][x].render(rows.eq(rows.length - x - 1));
+      self.tiles[y][x].bind(self);
     }
   }
 }
@@ -65,11 +68,6 @@ Board.prototype.render = function (selector) {
       (0,1)       (1,2)
             (0,2)
 
-
-.             (2,0)
-.       (1,0)       (2,1)
-. (0,0)       (1,1)
-.       (0,1)
 
 
 

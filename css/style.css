@@ -8,12 +8,23 @@
 .tile {
   position: relative;
   display: inline-block;
-  margin-right: 66px;
+  margin-right: 53px;
+}
+.tile .trigger {
+  position: absolute;
+  top: 1px;
+  left: 24px;
+  width: 110px;
+  height: 100px;
+  border-radius: 65px;
+  opacity: 0;
+  z-index: 100;
+  cursor: pointer;
 }
 .tile-pre {
   display: inline-block;
   width: 0;
-  border-right: 30px solid #6C6;
+  border-right: 30px solid #999999;
   border-top: 52px solid transparent;
   border-bottom: 52px solid transparent;
 }
@@ -21,11 +32,11 @@
   display: inline-block;
   width: 60px;
   height: 104px;
-  background-color: #6C6;
+  background-color: #999999;
 }
 .tile-post {
   display: inline-block;
-  border-left: 30px solid #6C6;
+  border-left: 30px solid #999999;
   border-top: 52px solid transparent;
   border-bottom: 52px solid transparent;
 }
