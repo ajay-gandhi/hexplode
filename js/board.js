@@ -1,14 +1,13 @@
 
 /**
- * Creates a new board, where n is the height of the board.
+ * Creates a new board with the given layout (see layouts.js).
  */
 function Board (layout) {
   var self = this;
 
   this.turn = -1;
-  this.n_players = layout.n;
-  this.playing = false;
   this.started = false;
+  this.tile_count = (new Array(layout.n)).fill(0);
 
   // Create tiles
   this.tiles = layout.template.map(function (drow) {
@@ -49,13 +48,31 @@ Board.prototype.render = function (selector) {
       }
 
       var rows = board_el.children('.row');
+      // Render the tiles
       self.tiles[y][x].render(rows.eq(rows.length - x - 1));
-      self.tiles[y][x].bind(self);
+      // Bind events for the tiles
+      self.tiles[y][x].bind();
+    }
+  }
+}
+
+/**
+ * Halts the game if a player has won.
+ */
+Board.prototype.check_game_over = function () {
+  if (this.playing && this.started) {
+    for (var i = 0; i < board.tile_count.length; i++) {
+      if (board.tile_count[i] == 0) {
+        console.log('Game over!');
+        this.playing = false;
+        this.started = false;
+      }
     }
   }
 }
 
 /*
+
 (0,0) (1,0) (2,0)
 (0,1) (1,1) (2,1)
 (0,2) (1,2) (2,2)
@@ -67,22 +84,5 @@ Board.prototype.render = function (selector) {
 (0,0)       (1,1)       (2,2)
       (0,1)       (1,2)
             (0,2)
-
-
-
-
-
-
-(0,0)                        
-      (0,1)                  
-(1,0)       (0,2)            
-      (1,1)       (0,3)      
-(2,0)       (1,2)       (0,4)
-      (2,1)       (1,3)      
-(3,0)       (2,2)       (1,4)
-      (3,1)       (2,3)      
-            (3,2)       (2,4)
-                  (3,3)      
-                        (3,4)
 
 */
