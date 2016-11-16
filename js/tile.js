@@ -26,7 +26,7 @@ Tile.prototype.init = function (board, x, y, color) {
  * positive, the tile is converted to `convert` color.
  */
 Tile.prototype.hit = function (color, convert) {
-  if (!this.board.playing) return console.log('nope');
+  if (!this.board.playing) return;
   if (!this.neighbors) return console.error('`hit` failed: tile not initialized.');
   if (this.color != color && convert == -1) return false;
 
@@ -111,7 +111,6 @@ Tile.prototype.update = function () {
   if (!this.tile_el) return console.error('`update` failed: tile not rendered.');
 
   this.set_color(this.color == -1 ? open_tile : color_map[this.color]);
-
   this.tile_el.find('.content').first().text(this.hits + '/' + this.cap);
 
   return this;
