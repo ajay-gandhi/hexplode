@@ -10,11 +10,11 @@
 }
 .board .indicator {
   position: absolute;
-  top: 20px;
-  left: 20px;
-  border-radius: 15px;
-  width: 30px;
-  height: 30px;
+  top: 10px;
+  left: 10px;
+  border-radius: 12px;
+  width: 24px;
+  height: 24px;
 }
 
 .tile {
@@ -43,7 +43,7 @@
 .tile-pre {
   display: inline-block;
   width: 0;
-  border-right: 30px solid #999999;
+  border-right: 30px solid #BBBBBB;
   border-top: 52px solid transparent;
   border-bottom: 52px solid transparent;
 }
@@ -51,11 +51,11 @@
   display: inline-block;
   width: 60px;
   height: 104px;
-  background-color: #999999;
+  background-color: #BBBBBB;
 }
 .tile-post {
   display: inline-block;
-  border-left: 30px solid #999999;
+  border-left: 30px solid #BBBBBB;
   border-top: 52px solid transparent;
   border-bottom: 52px solid transparent;
 }
