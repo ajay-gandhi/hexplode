@@ -35,15 +35,23 @@ Board.prototype.render = function (selector) {
   self.board_el = $('<div class="board"></div>');
   selector.append(self.board_el);
 
+  // Turn indicator
+  self.board_el.append($('<div class="indicator"></div>'));
+  self.board_el.find('.indicator').css('background-color', color_map[0]);
+
+  // Render tiles
   for (var y = 0; y < self.tiles.length; y++) {
     for (var x = 0; x < self.tiles[y].length; x++) {
+      if (!self.tiles[y][x]) continue;
 
       // Create a new row for all x = 0 and y = 0
       var new_row = $('<div class="row"></div>');
       if (y == 0) {
         self.board_el.prepend(new_row);
+        new_row.css('margin-left', (x * 97) + 'px');
       } else if (x == 0) {
         self.board_el.append(new_row);
+        new_row.css('margin-left', (y * 97) + 'px');
       }
 
       var rows = self.board_el.children('.row');
@@ -61,16 +69,23 @@ Board.prototype.render = function (selector) {
   self.board_el.width(self.board_el.width() + 'px');
 }
 
+Board.prototype.next_turn = function () {
+  if (this.playing) {
+    this.turn = (this.turn + 1) % this.tile_count.length;
+    this.board_el.find('.indicator').css('background-color', color_map[this.turn]);
+  }
+}
+
 /**
  * Halts the game if a player has won.
  */
 Board.prototype.check_game_over = function () {
   // All players must have played at least once
   if (this.started) {
-    for (var i = 0; i < board.tile_count.length; i++) {
+    for (var i = 0; i < this.tile_count.length; i++) {
       // Game over if any player 0 tiles
-      if (board.tile_count[i] == 0) {
-        console.log('Game over! Player', i, 'loses.');
+      if (this.tile_count[i] == 0) {
+        console.log('Game over! Player ' + i + ' loses.');
         this.playing = false;
         this.started = false;
         return true;

@@ -1,6 +1,6 @@
 
 // Map players to tile colors
-var color_map = ['#66CC66', '#FF4444'],
+var color_map = ['#44DD44', '#DD4444', '#DDDD44', '#4444DD'],
     open_tile = '#999999';
 
 function Tile () {
@@ -49,10 +49,12 @@ Tile.prototype.hit = function (color, convert) {
         nb.update();
       }
       this.board.check_game_over();
-    }, 500, this.neighbors);
-
-    // if (this.board.check_game_over()) return;
+    }, 00, this.neighbors);
   }
+
+  // Update tile
+  this.update();
+    
   return this;
 }
 
@@ -97,8 +99,7 @@ Tile.prototype.bind = function () {
         self.board.tile_count[self.board.turn]++;
       }
       self.hit(self.board.turn, -1);
-      self.board.turn = (self.board.turn + 1) % self.board.tile_count.length;
-      self.update();
+      self.board.next_turn();
     }
   });
   return this;
@@ -123,9 +124,9 @@ Tile.prototype.update = function () {
 Tile.prototype.set_color = function (color) {
   if (!this.tile_el) return console.error('`set_color` failed: tile not rendered.');
 
-  this.tile_el.find('.tile-pre').css('border-right', '30px solid ' + color);
-  this.tile_el.find('.tile-post').css('border-left', '30px solid ' + color);
-  this.tile_el.find('.tile-main').css('background-color', color);
+  this.tile_el.find('.tile-pre').css('borderRightColor', color);
+  this.tile_el.find('.tile-post').css('borderLeftColor', color);
+  this.tile_el.find('.tile-main').css('backgroundColor', color);
   return this;
 }
 
@@ -151,4 +152,15 @@ var get_neighbors = function (b, x, y) {
   if (y - 1 >= 0  && b[y - 1][x])                  n.push(b[y - 1][x    ]); // lower left
   if (x - 1 >= 0  && b[y][x - 1])                  n.push(b[y    ][x - 1]); // upper left
   return n;
+}
+
+/**
+ * Generates a darker color given a hex string.
+ */
+var darker_color = function (og) {
+  var offset = -40;
+  var r = parseInt(og.substring(1, 3), 16) - offset;
+  var g = parseInt(og.substring(3, 5), 16) - offset;
+  var b = parseInt(og.substring(5, 7), 16) - offset;
+  return '#' + r.toString(16) + g.toString(16) + b.toString(16);
 }

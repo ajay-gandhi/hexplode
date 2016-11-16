@@ -2,10 +2,19 @@
 .board {
   margin: 0 auto;
   padding-top: 50px;
-  text-align: center;
+  border: 1px solid red;
+  position: relative;
 }
 .board .row {
   margin-top: -50px;
+}
+.board .indicator {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 15px;
+  width: 30px;
+  height: 30px;
 }
 
 .tile {
