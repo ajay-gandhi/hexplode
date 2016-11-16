@@ -1,6 +1,6 @@
 
 // Map players to tile colors
-var color_map = ['#66CC66', 'red'],
+var color_map = ['#66CC66', '#FF4444'],
     open_tile = '#999999';
 
 function Tile () {
