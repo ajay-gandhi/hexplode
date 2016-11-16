@@ -30,10 +30,9 @@ Tile.prototype.hit = function (color, convert) {
   if (!this.neighbors) return console.error('`hit` failed: tile not initialized.');
   if (this.color != color && convert == -1) return false;
 
-  this.board.check_game_over();
-
   this.hits++;
   if (convert >= 0) {
+    if (this.color >= 0) this.board.tile_count[this.color]--;
     this.color = convert;
     this.board.tile_count[this.color]++;
   }
@@ -41,6 +40,8 @@ Tile.prototype.hit = function (color, convert) {
     this.hits = 0;
     this.board.tile_count[this.color]--;
     this.color = -1;
+
+    if (this.board.check_game_over()) return;
 
     // Trigger neighbors
     setTimeout(function (neighbors) {
@@ -50,11 +51,6 @@ Tile.prototype.hit = function (color, convert) {
         nb.update();
       }
     }, 500, this.neighbors);
-      // for (var i = 0; i < this.neighbors.length; i++) {
-      //   var nb = this.neighbors[i];
-      //   nb.hit(color, color);
-      //   nb.update();
-      // }
   }
   return this;
 }

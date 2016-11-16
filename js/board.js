@@ -6,6 +6,7 @@ function Board (layout) {
   var self = this;
 
   this.turn = -1;
+  this.playing = false;
   this.started = false;
   this.tile_count = (new Array(layout.n)).fill(0);
 
@@ -60,15 +61,17 @@ Board.prototype.render = function (selector) {
  * Halts the game if a player has won.
  */
 Board.prototype.check_game_over = function () {
-  if (this.playing && this.started) {
+  if (this.started) {
     for (var i = 0; i < board.tile_count.length; i++) {
       if (board.tile_count[i] == 0) {
         console.log('Game over!');
         this.playing = false;
         this.started = false;
+        return true;
       }
     }
   }
+  return false;
 }
 
 /*
