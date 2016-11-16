@@ -6,5 +6,5 @@ JavaScript implementation of the game
 
 ## Todo
 
-* Create game over alert
 * Create animation for explosion
+

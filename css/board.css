@@ -2,7 +2,6 @@
 .board {
   margin: 0 auto;
   padding-top: 50px;
-  border: 1px solid red;
   position: relative;
 }
 .board .row {
@@ -16,6 +15,9 @@
   width: 24px;
   height: 24px;
 }
+.board p {
+  font-size: 20px;
+}
 
 .tile {
   position: relative;
@@ -23,11 +25,12 @@
   margin-right: 75px;
 }
 .tile .content {
-  font-size: 18px;
-  text-align: center;
+  font-size: 16px;
+  text-align: right;
   position: absolute;
   top: 40px;
-  width: 100%;
+  left: 25px;
+  width: 50%;
 }
 .tile .trigger {
   position: absolute;

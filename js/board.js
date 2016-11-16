@@ -85,7 +85,9 @@ Board.prototype.check_game_over = function () {
     for (var i = 0; i < this.tile_count.length; i++) {
       // Game over if any player 0 tiles
       if (this.tile_count[i] == 0) {
-        console.log('Game over! Player ' + i + ' loses.');
+        this.board_el.append('<p>Game over! <span style="color:' + color_map[i]
+          + ';font-weight:bold;">Player ' + (i + 1) + '</span> loses.<br />' +
+          '<a onClick="history.go(0)">Play again</a></p>');
         this.playing = false;
         this.started = false;
         return true;
