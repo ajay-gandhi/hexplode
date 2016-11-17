@@ -3,8 +3,6 @@
 var color_map = ['#44DD44', '#DD4444', '#DDDD44', '#4444DD'],
     open_tile = '#BBBBBB';
 
-var cascades = 0;
-
 function Tile () {
   this.neighbors = false;
   this.tile_el = false;
@@ -32,8 +30,6 @@ Tile.prototype.hit = function (color, convert) {
   if (!this.neighbors) return console.error('`hit` failed: tile not initialized.');
   if (this.color != color && convert == -1) return false;
 
-  cascades++;
-
   this.hits++;
   if (convert >= 0) {
     if (this.color >= 0) this.board.tile_count[this.color]--;
@@ -52,15 +48,10 @@ Tile.prototype.hit = function (color, convert) {
         neighbors[i].hit(color, color);
       }
 
-      // Only check game over if no remaining cascaded explosions
-      cascades--;
-      if (cascades == 0) this.board.check_game_over();
+      this.board.check_game_over(color);
     }, 750, this.neighbors);
 
-  } else {
-    cascades--;
   }
-
 
   // Update tile
   this.update();

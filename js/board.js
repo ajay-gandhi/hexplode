@@ -77,12 +77,15 @@ Board.prototype.next_turn = function () {
 }
 
 /**
- * Halts the game if a player has won.
+ * Halts the game if a player has won. The input color is excluded from a check
+ * since a player cannot lose the game on their turn.
  */
-Board.prototype.check_game_over = function () {
+Board.prototype.check_game_over = function (c_exclude) {
   // All players must have played at least once
   if (this.started) {
     for (var i = 0; i < this.tile_count.length; i++) {
+      if (i == c_exclude) continue;
+
       // Game over if any player 0 tiles
       if (this.tile_count[i] == 0) {
         this.board_el.append('<p>Game over! <span style="color:' + color_map[i]
