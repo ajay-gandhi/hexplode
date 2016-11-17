@@ -10,10 +10,31 @@
 .board .indicator {
   position: absolute;
   top: 10px;
-  left: 10px;
+  left: 50px;
   border-radius: 12px;
-  width: 24px;
-  height: 24px;
+  width: 23px;
+  height: 23px;
+}
+.board .main-menu-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  height: 23px;
+  width: 28px;
+  overflow: hidden;
+}
+.board .main-menu-btn div {
+  margin: -25px 0px 0px -2px;
+}
+.board .main-menu-btn div a {
+  text-decoration: none;
+  color: #CC6666;
+  font-family: Courier;
+  font-size: 54px;
+  cursor: pointer;
+}
+.board .main-menu-btn div a:hover {
+  color: #FF0000;
 }
 .board p {
   font-size: 20px;

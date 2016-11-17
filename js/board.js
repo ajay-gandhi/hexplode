@@ -32,11 +32,15 @@ function Board (layout) {
  */
 Board.prototype.render = function (selector) {
   var self = this;
-  self.board_el = $('<div class="board"></div>');
+  self.board_el = $('<div class="board">' +
+    '<div class="indicator"></div>' +
+    '<div class="main-menu-btn">' +
+    '<div><a href="index.html">&#8801;</a></div>' +
+    '</div>' +
+    '</div>');
   selector.append(self.board_el);
 
   // Turn indicator
-  self.board_el.append($('<div class="indicator"></div>'));
   self.board_el.find('.indicator').css('background-color', color_map[0]);
 
   // Render tiles

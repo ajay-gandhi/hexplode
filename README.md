@@ -8,5 +8,4 @@ JavaScript implementation of the game
 
 * Center game horizontally and vertically
 * Write extensive readme
-* Add button for main menu
 
