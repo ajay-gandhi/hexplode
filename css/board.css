@@ -1,11 +1,11 @@
 
 .board {
   margin: 0 auto;
-  padding-top: 50px;
+  padding-top: 54px;
   position: relative;
 }
 .board .row {
-  margin-top: -50px;
+  margin-top: -54px;
 }
 .board .indicator {
   position: absolute;
@@ -17,6 +17,7 @@
 }
 .board p {
   font-size: 20px;
+  color: #FFFFFF;
 }
 
 .tile {
@@ -25,11 +26,12 @@
   margin-right: 75px;
 }
 .tile .content {
-  font-size: 16px;
+  font-family: 'Iceberg';
+  font-size: 30px;
   text-align: right;
   position: absolute;
-  top: 40px;
-  left: 25px;
+  top: 35px;
+  left: 21px;
   width: 50%;
 }
 .tile .trigger {
