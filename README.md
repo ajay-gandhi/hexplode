@@ -6,7 +6,7 @@ JavaScript implementation of the game
 
 ## Todo
 
-* Create animation for explosion
 * Center game horizontally and vertically
 * Write extensive readme
+* Add button for main menu
 

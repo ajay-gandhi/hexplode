@@ -3,6 +3,10 @@
 var color_map = ['#44DD44', '#DD4444', '#DDDD44', '#4444DD'],
     open_tile = '#BBBBBB';
 
+var EXPLOSION_DELAY    = 300,
+    EXPLOSION_DURATION = 800,
+    REFRESH_DURATION   = 100;
+
 function Tile () {
   this.neighbors = false;
   this.tile_el = false;
@@ -36,25 +40,30 @@ Tile.prototype.hit = function (color, convert) {
     this.color = convert;
     this.board.tile_count[this.color]++;
   }
+  this.update();
   if (this.hits == this.cap) {
-    this.hits = 0;
-    this.board.tile_count[this.color]--;
-    this.color = -1;
-
-    // Trigger neighbors
-    setTimeout(function (neighbors) {
-      // neighbors.forEach(function (n) { n.hit(color, color); });
-      for (var i = 0; i < neighbors.length; i++) {
-        neighbors[i].hit(color, color);
+    setTimeout(function (self) {
+      self.hits -= self.cap;
+      if (self.hits == 0) {
+        self.board.tile_count[self.color]--;
+        self.color = -1;
       }
 
-      this.board.check_game_over(color);
-    }, 750, this.neighbors);
+      // Trigger neighbors
+      setTimeout(function (neighbors) {
+        // neighbors.forEach(function (n) { n.hit(color, color); });
+        for (var i = 0; i < neighbors.length; i++) {
+          neighbors[i].hit(color, color);
+        }
 
+        self.board.check_game_over(color);
+      }, EXPLOSION_DURATION, self.neighbors);
+
+      self.explode();
+    }, EXPLOSION_DELAY, this);
+  } else {
+    this.update();
   }
-
-  // Update tile
-  this.update();
 
   return this;
 }
@@ -106,6 +115,14 @@ Tile.prototype.bind = function () {
   return this;
 }
 
+Tile.prototype.explode = function () {
+  var self = this;
+  this.tile_el.fadeOut(EXPLOSION_DURATION, function () {
+    self.update();
+    $(this).fadeIn(REFRESH_DURATION);
+  });
+}
+
 /**
  * Update the tile's rendering according to its fields. Must be called after
  * `render`.
@@ -114,7 +131,8 @@ Tile.prototype.update = function () {
   if (!this.tile_el) return console.error('`update` failed: tile not rendered.');
 
   this.set_color(this.color == -1 ? open_tile : color_map[this.color]);
-  this.tile_el.find('.content').first().text(this.hits + '/' + this.cap);
+  var hits = this.hits > this.cap ? this.cap : this.hits;
+  this.tile_el.find('.content').first().text(hits + '/' + this.cap);
 
   return this;
 }
