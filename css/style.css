@@ -7,12 +7,17 @@ body {
   background-color: #111111;
 }
 h1.title {
-  font-size: 40px;
+  font-size: 44px;
   text-align: center;
   color: #FFFFFF;
 }
 
-#options {
+#container {
+  position: absolute;
+  top: 50%;
+  height: 220px;
+  margin-top: -110px;
+  width: 100%;
   text-align: center;
   line-height: 1.8em;
 }
