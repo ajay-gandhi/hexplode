@@ -33,15 +33,14 @@ function Board (layout) {
 Board.prototype.render = function (selector) {
   var self = this;
   self.board_el = $('<div class="board">' +
-    '<div class="indicator"></div>' +
-    '<div class="main-menu-btn">' +
-    '<div><a href="index.html">&#8801;</a></div>' +
-    '</div>' +
     '</div>');
   selector.append(self.board_el);
 
   // Turn indicator
+  self.board_el.append('<div class="indicator"></div>');
   self.board_el.find('.indicator').css('background-color', color_map[0]);
+
+  self.board_el.parent().append('<div class="main-menu-btn"><div><a href="index.html">&#8801;</a></div></div>');
 
   // Render tiles
   for (var y = 0; y < self.tiles.length; y++) {
@@ -70,7 +69,10 @@ Board.prototype.render = function (selector) {
     $(this).find('.tile').last().css('margin', 0);
   });
 
-  self.board_el.width(self.board_el.width() + 'px');
+  // Vertical centering
+  self.board_el
+    .css('margin-top', -(self.board_el.outerHeight(false) / 2) + 'px')
+    .css('margin-left', -(self.board_el.outerWidth(false) / 2) + 'px');
 }
 
 Board.prototype.next_turn = function () {

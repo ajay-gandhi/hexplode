@@ -1,8 +1,10 @@
 
 .board {
-  margin: 0 auto;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
   padding-top: 54px;
-  position: relative;
+  text-align: left;
 }
 .board .row {
   margin-top: -54px;
@@ -10,12 +12,12 @@
 .board .indicator {
   position: absolute;
   top: 10px;
-  left: 50px;
+  left: 40px;
   border-radius: 12px;
   width: 23px;
   height: 23px;
 }
-.board .main-menu-btn {
+.main-menu-btn {
   position: absolute;
   top: 10px;
   left: 10px;
@@ -23,17 +25,17 @@
   width: 28px;
   overflow: hidden;
 }
-.board .main-menu-btn div {
+.main-menu-btn div {
   margin: -25px 0px 0px -2px;
 }
-.board .main-menu-btn div a {
+.main-menu-btn div a {
   text-decoration: none;
   color: #CC6666;
   font-family: Courier;
   font-size: 54px;
   cursor: pointer;
 }
-.board .main-menu-btn div a:hover {
+.main-menu-btn div a:hover {
   color: #FF0000;
 }
 .board p {
@@ -44,7 +46,7 @@
 .tile {
   position: relative;
   display: inline-block;
-  margin-right: 75px;
+  margin-right: 74px;
 }
 .tile .content {
   font-family: 'Iceberg';

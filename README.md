@@ -6,6 +6,5 @@ JavaScript implementation of the game
 
 ## Todo
 
-* Center game horizontally and vertically
 * Write extensive readme
 
