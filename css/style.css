@@ -5,6 +5,7 @@
 
 body {
   background-color: #111111;
+  overflow: hidden;
 }
 h1.title {
   font-size: 44px;
@@ -16,7 +17,7 @@ h1.title {
   position: absolute;
   top: 50%;
   height: 220px;
-  margin-top: -110px;
+  margin: -110px 0 0 0;
   width: 100%;
   text-align: center;
   line-height: 1.8em;
