@@ -7,6 +7,8 @@ var EXPLOSION_DELAY    = 300,
     EXPLOSION_DURATION = 800,
     REFRESH_DURATION   = 100;
 
+var is_cascading = 0;
+
 function Tile () {
   this.neighbors = false;
   this.tile_el = false;
@@ -34,6 +36,9 @@ Tile.prototype.hit = function (color, convert) {
   if (!this.neighbors) return console.error('`hit` failed: tile not initialized.');
   if (this.color != color && convert == -1) return false;
 
+  // Count movements
+  is_cascading++;
+
   this.hits++;
   if (convert >= 0) {
     if (this.color >= 0) this.board.tile_count[this.color]--;
@@ -57,13 +62,16 @@ Tile.prototype.hit = function (color, convert) {
         }
 
         self.board.check_game_over(color);
+        is_cascading--;
       }, EXPLOSION_DURATION, self.neighbors);
 
       self.explode();
     }, EXPLOSION_DELAY, this);
   } else {
+    is_cascading--;
     this.update();
   }
+
 
   return this;
 }
@@ -93,6 +101,10 @@ Tile.prototype.bind = function () {
   if (!this.tile_el) return console.error('`bind` failed: tile not rendered.');
 
   this.tile_el.find('.trigger').click(function () {
+    // If other turn is still happening, ignore
+    if (is_cascading != 0) return;
+    console.log(is_cascading);
+
     // Start the game if not started
     if (self.board.turn == -1) {
       self.board.turn = 0;
