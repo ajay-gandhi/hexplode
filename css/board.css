@@ -5,9 +5,11 @@
   top: 50%;
   padding-top: 54px;
   text-align: left;
+  border: 1px solid blue;
 }
 .board .row {
   margin-top: -54px;
+  height: 110px;
 }
 .board .indicator {
   position: absolute;
@@ -41,6 +43,10 @@
 .board p {
   font-size: 20px;
   color: #FFFFFF;
+}
+
+.dummy {
+  opacity: 0;
 }
 
 .tile {

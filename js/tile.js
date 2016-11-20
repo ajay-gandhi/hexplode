@@ -1,4 +1,9 @@
 
+/**
+ * Tile class. An instance of this class represents the backend for a tile on
+ * the board, as well as the frontend rendering.
+ */
+
 // Map players to tile colors
 var color_map = ['#44DD44', '#DD4444', '#DDDD44', '#4444DD'],
     open_tile = '#BBBBBB';
@@ -10,6 +15,7 @@ var EXPLOSION_DELAY    = 300,
 var is_cascading = 0;
 
 function Tile () {
+  this.is_tile = true;
   this.neighbors = false;
   this.tile_el = false;
 }
@@ -176,12 +182,12 @@ var get_neighbors = function (b, x, y) {
       xm = b[0].length;
   var n = [];
 
-  if (x - 1 >= 0 && y + 1 < ym && b[y + 1][x - 1]) n.push(b[y + 1][x - 1]); // above
-  if (y + 1 < ym && b[y + 1][x])                   n.push(b[y + 1][x    ]); // upper right
-  if (x + 1 < xm && b[y][x + 1])                   n.push(b[y    ][x + 1]); // lower right
-  if (x + 1 < xm && y - 1 >= 0 && b[y - 1][x + 1]) n.push(b[y - 1][x + 1]); // below
-  if (y - 1 >= 0  && b[y - 1][x])                  n.push(b[y - 1][x    ]); // lower left
-  if (x - 1 >= 0  && b[y][x - 1])                  n.push(b[y    ][x - 1]); // upper left
+  if (x - 1 >= 0 && y + 1 < ym && b[y + 1][x - 1].is_tile) n.push(b[y + 1][x - 1]); // above
+  if (y + 1 < ym && b[y + 1][x].is_tile)                   n.push(b[y + 1][x    ]); // upper right
+  if (x + 1 < xm && b[y][x + 1].is_tile)                   n.push(b[y    ][x + 1]); // lower right
+  if (x + 1 < xm && y - 1 >= 0 && b[y - 1][x + 1].is_tile) n.push(b[y - 1][x + 1]); // below
+  if (y - 1 >= 0  && b[y - 1][x].is_tile)                  n.push(b[y - 1][x    ]); // lower left
+  if (x - 1 >= 0  && b[y][x - 1].is_tile)                  n.push(b[y    ][x - 1]); // upper left
   return n;
 }
 

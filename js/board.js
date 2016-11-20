@@ -13,16 +13,15 @@ function Board (layout) {
   // Create tiles
   this.tiles = layout.template.map(function (drow) {
     return drow.map(function (is_tile) {
-      return is_tile == 1 ? new Tile() : false;
+      return is_tile == 1 ? new Tile() : new Dummy();
     });
   });
 
   // Initialize tiles
   this.tiles.forEach(function (drow, y) {
     drow.forEach(function (tile, x) {
-      if (tile) {
-        tile.init(self, x, y, -1);
-      }
+      if (tile.is_tile) tile.init(self, x, y, -1);        
+      else              tile.init(self, x, y);
     });
   });
 }
@@ -42,12 +41,10 @@ Board.prototype.render = function (selector) {
 
   self.board_el.parent().append('<div class="main-menu-btn"><div><a href="index.html">&#8801;</a></div></div>');
 
-  // Render tiles
   for (var y = 0; y < self.tiles.length; y++) {
     for (var x = 0; x < self.tiles[y].length; x++) {
-      if (!self.tiles[y][x]) continue;
 
-      // Create a new row for all x = 0 and y = 0
+      // Create rows for tiles
       var new_row = $('<div class="row"></div>');
       if (y == 0) {
         self.board_el.prepend(new_row);
@@ -57,13 +54,40 @@ Board.prototype.render = function (selector) {
         new_row.css('margin-left', (y * 97) + 'px');
       }
 
+      // Render tiles
       var rows = self.board_el.children('.row');
-      // Render the tiles
       self.tiles[y][x].render(rows.eq(rows.length - x - 1));
       // Bind events for the tiles
-      self.tiles[y][x].bind();
+      if (self.tiles[y][x].is_tile) self.tiles[y][x].bind();
     }
   }
+
+  // // Set width of board
+  // var largest_size = self.board_el.children('.row').toArray().reduce(function (cur_max, row) {
+  //   // Compute number of visible tiles in this row
+  //   var width = $(row).children('.tile').toArray().reduce(function (acc, tile) {
+  //     if (!$(tile).hasClass('dummy')) acc.tile_started = true;
+
+  //     if (!$(tile).hasClass('dummy')) {
+  //       acc.width += 1 + acc.space_width;
+  //       acc.space_width = 0;
+  //     } else if (acc.tile_started) {
+  //       acc.space_width += 1;
+  //     }
+  //     return acc;
+  //   }, {
+  //     width: 0,
+  //     space_width: 0,
+  //     tile_started: false
+  //   }).width;
+
+  //   return width > cur_max ? width : cur_max;
+  // }, 0);
+
+  // var actual_width = (largest_size * 200) + ((largest_size - 1) * 130);
+  var largest_size = Math.max(self.tiles.length, self.tiles[0].length);
+  var width = (largest_size * 120) + ((largest_size - 1) * 74);
+  self.board_el.css('width', width + 'px');
 
   self.board_el.find('.row').each(function () {
     $(this).find('.tile').last().css('margin', 0);

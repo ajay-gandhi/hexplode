@@ -25,7 +25,6 @@ Consider the small map below. `o` represents an open tile.
 o     o     o
    o     o
       o
-
 ```
 
 This layout can be considered "3x3" and is a two-player map. We can represent
@@ -85,4 +84,5 @@ Each layout is a property of the `LAYOUTS` object, with the key being the public
 name of the layout. `n` represents the number of players for a given map, and
 `template` is a 2D array. `1`s in the array will be converted to open tiles, and
 `0`s will be converted to empty space (see "Triangle" layout).
+
 
