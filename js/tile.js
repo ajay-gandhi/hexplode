@@ -66,12 +66,14 @@ Tile.prototype.hit = function (color, convert) {
 
         self.board.check_game_over(color);
         is_cascading--;
+        if (is_cascading == 0) self.board.next_turn();
       }, EXPLOSION_DURATION, self.neighbors);
 
       self.explode();
     }, EXPLOSION_DELAY, this);
   } else {
     is_cascading--;
+    if (is_cascading == 0) self.board.next_turn();
     this.update();
   }
 
@@ -123,7 +125,6 @@ Tile.prototype.bind = function () {
         self.board.tile_count[self.board.turn]++;
       }
       self.hit(self.board.turn, -1);
-      self.board.next_turn();
     }
   });
   return this;

@@ -85,7 +85,3 @@ name of the layout. `n` represents the number of players for a given map, and
 `template` is a 2D array. `1`s in the array will be converted to open tiles, and
 `0`s will be converted to empty space (see "Triangle" layout).
 
-## Todo
-
-* Fix winner check for > 2 players
-

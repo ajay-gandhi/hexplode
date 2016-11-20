@@ -9,6 +9,7 @@ function Board (layout) {
   this.playing = false;
   this.started = false;
   this.tile_count = (new Array(layout.n)).fill(0);
+  this.p_lost = (new Array(layout.n)).fill(false);
 
   // Create tiles
   this.tiles = layout.template.map(function (drow) {
@@ -81,7 +82,9 @@ Board.prototype.render = function (selector) {
 
 Board.prototype.next_turn = function () {
   if (this.playing) {
-    this.turn = (this.turn + 1) % this.tile_count.length;
+    do {
+      this.turn = (this.turn + 1) % this.tile_count.length;
+    } while (this.p_lost[this.turn]);
     this.board_el.parent().find('.indicator').css('background-color', color_map[this.turn]);
   }
 }
@@ -98,25 +101,38 @@ Board.prototype.check_game_over = function (c_exclude) {
 
       // Game over if any player has 0 tiles
       if (this.tile_count[i] == 0) {
-        // Stop all animations
-        this.tiles.forEach(function (drow, y) {
-          drow.forEach(function (tile, x) {
-            if (tile.is_tile) window.clearTimeout(tile.timeoutId);
-          });
+        this.p_lost[i] = true;
+
+        // Find out which players are remaining
+        var game_status = this.p_lost.reduce(function (status, c, i) {
+          return c ? { pr: status.pr, which: status.which } : { pr: status.pr + 1, which: i};
+        }, {
+          pr: 0,
+          which: 0
         });
 
-        this.playing = false;
-        this.started = false;
+        if (game_status.pr == 1) {
+          // Stop all animations
+          this.tiles.forEach(function (drow, y) {
+            drow.forEach(function (tile, x) {
+              if (tile.is_tile) window.clearTimeout(tile.timeoutId);
+            });
+          });
 
-        this.board_el.find('.game-over').html('Game over! ' +
-          '<span style="color:' + color_map[i] + ';font-weight:bold;">Player ' +
-          (i + 1) + '</span> loses.<br />' +
-          '<a onClick="history.go(0)">Play again</a>');
+          this.playing = false;
+          this.started = false;
 
-        this.board_el.find('.cover').fadeTo('normal', 0.9);
-        this.board_el.find('.game-over').fadeIn();
+          this.board_el.find('.game-over').html('Game over! ' +
+            '<span style="color:' + color_map[game_status.which] +
+            ';font-weight:bold;">Player ' + (game_status.which + 1) +
+            '</span> wins!<br />' +
+            '<a onClick="history.go(0)">Play again</a>');
 
-        return true;
+          this.board_el.find('.cover').fadeTo('normal', 0.9);
+          this.board_el.find('.game-over').fadeIn();
+
+          return true;
+        }
       }
     }
   }
