@@ -101,13 +101,9 @@ Board.prototype.check_game_over = function (c_exclude) {
         // Stop all animations
         this.tiles.forEach(function (drow, y) {
           drow.forEach(function (tile, x) {
-            if (tile.is_tile) {
-              tile.tile_el.stop();
-              window.clearTimeout(tile.timeoutId);
-            }
+            if (tile.is_tile) window.clearTimeout(tile.timeoutId);
           });
         });
-
 
         this.playing = false;
         this.started = false;
