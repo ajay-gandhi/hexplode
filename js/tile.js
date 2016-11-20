@@ -62,10 +62,7 @@ Tile.prototype.hit = function (color, convert) {
 
       // Trigger neighbors
       self.timeoutId = window.setTimeout(function (neighbors) {
-        // neighbors.forEach(function (n) { n.hit(color, color); });
-        for (var i = 0; i < neighbors.length; i++) {
-          neighbors[i].hit(color, color);
-        }
+        neighbors.forEach(function (n) { n.hit(color, color); });
 
         self.board.check_game_over(color);
         is_cascading--;
