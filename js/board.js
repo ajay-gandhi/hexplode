@@ -20,7 +20,7 @@ function Board (layout) {
   // Initialize tiles
   this.tiles.forEach(function (drow, y) {
     drow.forEach(function (tile, x) {
-      if (tile.is_tile) tile.init(self, x, y, -1);        
+      if (tile.is_tile) tile.init(self, x, y, -1);
       else              tile.init(self, x, y);
     });
   });
@@ -96,8 +96,19 @@ Board.prototype.check_game_over = function (c_exclude) {
     for (var i = 0; i < this.tile_count.length; i++) {
       if (i == c_exclude) continue;
 
-      // Game over if any player 0 tiles
+      // Game over if any player has 0 tiles
       if (this.tile_count[i] == 0) {
+        // Stop all animations
+        this.tiles.forEach(function (drow, y) {
+          drow.forEach(function (tile, x) {
+            if (tile.is_tile) {
+              tile.tile_el.stop();
+              window.clearTimeout(tile.timeoutId);
+            }
+          });
+        });
+
+
         this.playing = false;
         this.started = false;
 

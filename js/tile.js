@@ -53,7 +53,7 @@ Tile.prototype.hit = function (color, convert) {
   }
   this.update();
   if (this.hits == this.cap) {
-    setTimeout(function (self) {
+    this.timeoutId = window.setTimeout(function (self) {
       self.hits -= self.cap;
       if (self.hits == 0) {
         self.board.tile_count[self.color]--;
@@ -61,7 +61,7 @@ Tile.prototype.hit = function (color, convert) {
       }
 
       // Trigger neighbors
-      setTimeout(function (neighbors) {
+      self.timeoutId = window.setTimeout(function (neighbors) {
         // neighbors.forEach(function (n) { n.hit(color, color); });
         for (var i = 0; i < neighbors.length; i++) {
           neighbors[i].hit(color, color);

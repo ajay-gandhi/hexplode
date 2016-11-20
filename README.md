@@ -88,4 +88,5 @@ name of the layout. `n` represents the number of players for a given map, and
 ## Todo
 
 * Fix winner check for > 2 players
+* Change neighbor cascaded hits from for loop to foreach
 
