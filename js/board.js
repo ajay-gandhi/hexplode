@@ -62,28 +62,6 @@ Board.prototype.render = function (selector) {
     }
   }
 
-  // // Set width of board
-  // var largest_size = self.board_el.children('.row').toArray().reduce(function (cur_max, row) {
-  //   // Compute number of visible tiles in this row
-  //   var width = $(row).children('.tile').toArray().reduce(function (acc, tile) {
-  //     if (!$(tile).hasClass('dummy')) acc.tile_started = true;
-
-  //     if (!$(tile).hasClass('dummy')) {
-  //       acc.width += 1 + acc.space_width;
-  //       acc.space_width = 0;
-  //     } else if (acc.tile_started) {
-  //       acc.space_width += 1;
-  //     }
-  //     return acc;
-  //   }, {
-  //     width: 0,
-  //     space_width: 0,
-  //     tile_started: false
-  //   }).width;
-
-  //   return width > cur_max ? width : cur_max;
-  // }, 0);
-
   // var actual_width = (largest_size * 200) + ((largest_size - 1) * 130);
   var largest_size = Math.max(self.tiles.length, self.tiles[0].length);
   var width = (largest_size * 120) + ((largest_size - 1) * 74);
