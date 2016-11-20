@@ -32,12 +32,14 @@ function Board (layout) {
 Board.prototype.render = function (selector) {
   var self = this;
   self.board_el = $('<div class="board">' +
+    '<div class="cover"></div>' +
+    '<div class="game-over"></div>' +
     '</div>');
   selector.append(self.board_el);
 
   // Turn indicator
-  self.board_el.append('<div class="indicator"></div>');
-  self.board_el.find('.indicator').css('background-color', color_map[0]);
+  self.board_el.parent().append('<div class="indicator"></div>');
+  self.board_el.parent().find('.indicator').css('background-color', color_map[0]);
 
   self.board_el.parent().append('<div class="main-menu-btn"><div><a href="index.html">&#8801;</a></div></div>');
 
@@ -80,7 +82,7 @@ Board.prototype.render = function (selector) {
 Board.prototype.next_turn = function () {
   if (this.playing) {
     this.turn = (this.turn + 1) % this.tile_count.length;
-    this.board_el.find('.indicator').css('background-color', color_map[this.turn]);
+    this.board_el.parent().find('.indicator').css('background-color', color_map[this.turn]);
   }
 }
 
@@ -96,11 +98,17 @@ Board.prototype.check_game_over = function (c_exclude) {
 
       // Game over if any player 0 tiles
       if (this.tile_count[i] == 0) {
-        this.board_el.append('<p>Game over! <span style="color:' + color_map[i]
-          + ';font-weight:bold;">Player ' + (i + 1) + '</span> loses.<br />' +
-          '<a onClick="history.go(0)">Play again</a></p>');
         this.playing = false;
         this.started = false;
+
+        this.board_el.find('.game-over').html('Game over! ' +
+          '<span style="color:' + color_map[i] + ';font-weight:bold;">Player ' +
+          (i + 1) + '</span> loses.<br />' +
+          '<a onClick="history.go(0)">Play again</a>');
+
+        this.board_el.find('.cover').fadeTo('normal', 0.9);
+        this.board_el.find('.game-over').fadeIn();
+
         return true;
       }
     }

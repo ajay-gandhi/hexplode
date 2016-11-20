@@ -109,7 +109,6 @@ Tile.prototype.bind = function () {
   this.tile_el.find('.trigger').click(function () {
     // If other turn is still happening, ignore
     if (is_cascading != 0) return;
-    console.log(is_cascading);
 
     // Start the game if not started
     if (self.board.turn == -1) {
