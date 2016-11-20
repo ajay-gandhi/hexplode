@@ -126,9 +126,10 @@ Board.prototype.check_game_over = function (c_exclude) {
             '<span style="color:' + color_map[game_status.which] +
             ';font-weight:bold;">Player ' + (game_status.which + 1) +
             '</span> wins!<br />' +
+            '<a href="index.html">Menu</a>&nbsp;&nbsp;&nbsp;' +
             '<a onClick="history.go(0)">Play again</a>');
 
-          this.board_el.find('.cover').fadeTo('normal', 0.9);
+          this.board_el.find('.cover').fadeTo('normal', 0.95);
           this.board_el.find('.game-over').fadeIn();
 
           return true;
