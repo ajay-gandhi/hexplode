@@ -20,11 +20,11 @@ laid out in the following scheme:
 Consider the small map below. `o` represents an open tile.
 
 ```
-      o
-   o     o
-o     o     o
-   o     o
-      o
+        o
+    o       o
+o       o       o
+    o       o
+        o
 ```
 
 This layout can be considered "3x3" and is a two-player map. We can represent
@@ -52,7 +52,7 @@ this map in a simple 2D array by rotating it by 45 degrees and flattening it:
 
                            |
                            |
-                        (flatten)
+                       (flatten)
                            |
                            |
                            V
