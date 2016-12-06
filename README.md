@@ -4,6 +4,8 @@
 This is a JavaScript implementation of the game
 ["Hexplode"](https://en.wikipedia.org/wiki/Hexplode).
 
+[Play Hexplode](http://ajay-gandhi.github.io/hexplode)
+
 ## Layout
 
 * `js/`: Game logic
