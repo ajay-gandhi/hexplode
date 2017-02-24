@@ -123,6 +123,7 @@
 }
 .tile-post {
   display: inline-block;
+  width: 0;
   border-left: 30px solid #BBBBBB;
   border-top: 52px solid transparent;
   border-bottom: 52px solid transparent;

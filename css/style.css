@@ -3,6 +3,12 @@
   font-family: 'Stalinist One', cursive;
 }
 
+@media (max-width: 850px), (max-height: 600px) {
+  .board {
+    transform: scale(.5);
+  }
+}
+
 body {
   background-color: #111111;
   overflow: hidden;
