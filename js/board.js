@@ -2,8 +2,15 @@
 /**
  * Creates a new board with the given layout (see layouts.js).
  */
-function Board (layout) {
+function Board (layout, solo) {
   var self = this;
+
+  this.is_one_p = solo;
+  // Create AI
+  if (this.is_one_p) {
+    if (layout.n > 2) window.location = '/';
+    this.ai = new HexplodeAI(self);
+  }
 
   this.turn = -1;
   this.playing = false;
@@ -85,6 +92,9 @@ Board.prototype.next_turn = function () {
     do {
       this.turn = (this.turn + 1) % this.tile_count.length;
     } while (this.p_lost[this.turn]);
+
+    if (this.is_one_p && this.turn == 1) this.ai.play();
+
     this.board_el.parent().find('.indicator').css('background-color', color_map[this.turn]);
   }
 }

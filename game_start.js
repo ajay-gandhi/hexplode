@@ -4,7 +4,9 @@ $(document).ready(function () {
   var which_layout = get_url_param('layout');
   var layout = LAYOUTS[which_layout] || LAYOUTS['Small'];
 
-  board = new Board(layout);
+  var solo = get_url_param('solo') === 'true';
+
+  board = new Board(layout, solo);
   board.render($('#board'));
 });
 

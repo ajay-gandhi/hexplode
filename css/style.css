@@ -22,8 +22,8 @@ h1.title {
 #container {
   position: absolute;
   top: 50%;
-  height: 220px;
-  margin: -110px 0 0 0;
+  height: 280px;
+  margin: -140px 0 0 0;
   width: 100%;
   text-align: center;
   line-height: 1.8em;
@@ -43,3 +43,21 @@ a:hover {
   text-align: center;
 }
 
+/**
+ * Checkbox
+ */
+#is-solo {
+  width: 200px;
+  height: 30px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  background: none;
+  border-radius:4px;
+  color: #DD5555;
+  border: 2px solid #DD5555;
+  cursor: pointer;
+}
+#is-solo:hover {
+  color: #FF0000;
+  border: 2px solid #FF0000;
+}
