@@ -54,17 +54,20 @@ var evaluate_play = function (board, wt, me) {
   // Compute value of play
   var score = 6 - wt.cap + wt.hits;
 
+  // Add some randomness lmao
+  if (Math.random() > 0.85) return score + 2;
+
   for (var i = 0; i < wt.neighbors.length; i++) {
     var nb = wt.neighbors[i];
-    if (nb.cap - nb.hits == 1 && wt.cap - wt.hits == 1) score++;
+    if (nb.cap - nb.hits == 1 && wt.cap - wt.hits == 1) score += 2;
     if (nb.color == me) {
       // I own neighbor
       score++;
 
     } else if (nb.color >= 0) {
       // Opponent owns neighbor
-      score--;
-      if (nb.cap - nb.hits == 1 && wt.cap - wt.hits == 2) score--;
+      // score--;
+      if (nb.cap - nb.hits == 1 && wt.cap - wt.hits == 2) score -= 2;
     }
   }
 
