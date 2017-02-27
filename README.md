@@ -2,9 +2,19 @@
 # Hexplode
 
 This is a JavaScript implementation of the game
-["Hexplode"](https://en.wikipedia.org/wiki/Hexplode).
+Hexplode.
 
 [Play Hexplode](http://ajay-gandhi.github.io/hexplode)
+
+## Rules
+
+Hexplode is a turn-based strategy game. The objective is to wipe your opponent's
+color off the map by hexploding tiles.
+
+Each tile has a capacity, displayed on each tile. Clicking or tapping a gray
+tile claims it as yours. Each successive hit on the tile adds one to its
+counter. Once the tile reaches its capacity, the tile "hexplodes", hitting all
+surrounding tiles and making them yours.
 
 ## Layout
 
