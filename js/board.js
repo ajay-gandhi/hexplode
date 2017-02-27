@@ -82,9 +82,16 @@ Board.prototype.render = function (selector) {
   });
 
   // Vertical centering
+  // Need to modify values if small screen
+  var board_h = self.board_el.outerHeight(false),
+      board_w = self.board_el.outerWidth(false);
+  if ($(window).width() < 850 || $(window).height() < 600) {
+    board_h *= 2;
+    board_w *= 2;
+  }
   self.board_el
-    .css('margin-top', -(self.board_el.outerHeight(false) / 2) + 'px')
-    .css('margin-left', -(self.board_el.outerWidth(false) / 2) + 'px');
+    .css('margin-top', -(board_h / 2) + 'px')
+    .css('margin-left', -(board_w / 2) + 'px');
 }
 
 Board.prototype.next_turn = function () {
